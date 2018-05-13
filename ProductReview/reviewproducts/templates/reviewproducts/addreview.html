@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <title>Review Application</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Product Review Prototype</a>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Homepage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'addproduct' %}">Add Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'addreview' %}">Review Products</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+           <div class="card-deck">
+        {% for c in reviews %} 
+    <div class="col-sm-4">
+        <div class="row">
+            <p> </p>
+        </div>
+        <div class="row">
+            <div class="card">
+                <img class="card-img-top img-thumbnail" src="{{ c.product.productimage }}" alt="Product Image">
+                <div class="card-body">
+                <h4 class="card-title">{{ c.product.producttitle }}</h5>
+                <h5 class="card-title">{{ c.reviewtitle }}</h4>
+                <p class="card-text">{{ c.reviewdesc }}</p>
+                <p class="card-text">Rated {{ c.rating }} out of 5</p>
+            </div>
+                <div class="card-footer">
+                    <small class="text-muted">added {{ c.date_added }} by {{ c.user }}</small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <p> </p>
+        </div>
+    </div>
+        {% endfor %}
+    </div>
+    </div>
+    <div class="container">
+        <div>
+            <hr></hr>
+            <h1>Review a product on the website</h1>
+            <hr></hr>
+        </div>
+        <form method="POST" action="{% url 'addreview' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="selectproducttitle">Select Product Title</label>
+                <!--<select name="product" class="form-control" id="id_product">
+                {% for c in products %}
+                <option value=""></option>
+                {% endfor %}
+                </select>-->
+                {{ form.productid }}
+            </div>
+            <div class="form-group">
+                <label for="reviewtitleinput">Review Title</label>
+                <!--<input type="text" class="form-control" id="reviewtitleinput" placeholder="Enter Review Title">-->
+                {{ form.reviewtitle}}
+            </div>
+            <div class="form-group">
+                <label for="reviewdescinput">Review Description</label>
+                <!-- <textarea class="form-control" id="reviewdescinput" rows="3"></textarea> -->
+                {{ form.reviewdesc }}
+            </div>
+            <div class="form-group">
+                <label for="selectreviewrating">Select Star Rating</label>
+                <!--<select class="form-control" id="selectreviewrating">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select> -->
+                {{ form.rating }}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

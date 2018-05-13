@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <title>Review Application</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Product Review Prototype</a>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Homepage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'addproduct' %}">Add Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'addreview' %}">Review Products</a>
+            </li>
+        </ul>
+    </nav>
+{% block body %}
+<div class="container">
+
+    <div class="col">
+        <p> </p>
+<h1>{{ product.producttitle }}</h1>
+<hr>
+<p>{{ product.productdesc }}</p>
+<small>Price : £{{ product.productprice }}</small>
+    </div>
+    <div class="col-6">
+        <img class="img-fluid img-thumbnail align-middle" src="{{ product.productimage }}" alt="Product Image">
+    </div>
+</div>
+{% endblock %}
+</body>
+
+</html>

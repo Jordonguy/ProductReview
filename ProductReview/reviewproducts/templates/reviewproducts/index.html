@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <title>Review Application</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Product Review Prototype</a>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'index' %}">Homepage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'addproduct' %}">Add Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'addreview' %}">Review Products</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div>
+            <h1>Welcome to the website</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies quam quis urna tincidunt varius. In et odio ornare, consectetur magna non, sagittis nisi. Aliquam imperdiet ligula at suscipit fermentum. Cras imperdiet velit tempus mi placerat efficitur. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse potenti.</p>
+        </div>
+        <div>
+            <h1>All Products</h1>
+            <hr></hr>
+        </div>
+        <div class="card-deck">
+        {% for c in products %} 
+    <div class="col-sm-4">
+        <div class="row">
+            <p> </p>
+        </div>
+        <div class="row">
+            <div class="card">
+                <img class="card-img-top img-thumbnail img-responsive" src="{{ c.productimage }}" alt="Product Image">
+                <div class="card-body">
+                <h5 class="card-title">{{ c.producttitle }}</h5>
+                <p class="card-text">{{ c.productdesc }}</p>
+                <small class="text-muted">Price : £{{ c.productprice }}</small>
+            </div>
+                <div class="card-footer">  
+                    <a class="btn btn-primary align-middle" href="/reviewproducts/{{ c.id }}" role="button">View Product Page</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <p> </p>
+        </div>
+    </div>
+        {% endfor %}
+    </div>
+    </div>
+
+</body>
+
+</html>
